@@ -1,0 +1,58 @@
+server:
+  port: 8083
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 883462124254-agp4np720v374b2ghkec9i4gp1uklfsm.apps.googleusercontent.com
+            client-secret: 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
+            redirectUri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - https://www.googleapis.com/auth/analytics
+              - https://www.googleapis.com/auth/analytics.readonly
+              - openid
+              - email
+              - https://www.googleapis.com/auth/cloud-platform
+
+  datasource:
+    url: jdbc:mysql://database-1.chugpmha4d6s.us-west-1.rds.amazonaws.com:3306/brand_plus?useSSL=false
+    username: neobest01
+    password: Qzj950925.
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+logging:
+  level:
+    org.hibernate.stat: debug
+    org.hibernate.type: trace
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+google-auth-endpoint:
+  base: "https://analyticsdata.googleapis.com/v1beta/"
+  key: ":runReport?key=AIzaSyB8Gk5ikmZJ6LORq7cWUHzkH_WjqjH7wrQ"
+#  metrics:
+#    - name: "firstTimePurchasers"
+#    - name: "itemRevenue"
+#    - name: "itemsPurchased"
+#    - name: "totalPurchasers"
+#  dateRanges:
+#    startDate: "30daysAgo"
+#    endDate: "yesterday"
+  keepEmptyRows: true
+google-account-endpoint:
+  base: "https://analyticsadmin.googleapis.com/v1beta/accountSummaries?key="
+  key: "AIzaSyB8Gk5ikmZJ6LORq7cWUHzkH_WjqjH7wrQ"
