@@ -39,6 +39,21 @@ public class DateService {
         return previousDay.format(formatter);
     }
 
+    public String getPrevious30DayInPDT(String inputDate) {
+        // Parse the input date string
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(inputDate, formatter);
+
+        // Convert to Pacific Time Zone
+        ZonedDateTime pdtDateTime = ZonedDateTime.of(date.atStartOfDay(), ZoneId.of(PACIFIC_TIME_ZONE));
+
+        // Get the previous day
+        ZonedDateTime previousDay = pdtDateTime.minusDays(30);
+
+        // Format the result as "YYYY-MM-DD"
+        return previousDay.format(formatter);
+    }
+
     public Long convertToUnixTimeInPDT(String dateString) {
         // Parse the input date string
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

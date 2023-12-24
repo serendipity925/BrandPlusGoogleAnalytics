@@ -46,5 +46,34 @@ public class GoogleAuthConfig {
 
             return requestBody.toString();
         }
+
+        public String generateRequestBody2(List<String> metrics, List<String> dimensions, String startDate, String endDate) {
+            StringBuilder requestBody = new StringBuilder("{"
+                    + "\"dimensions\":[");
+            for (String dimension : dimensions) {
+                requestBody.append("{\"name\":\"").append(dimension).append("\"},");
+            }
+            // Remove the last comma
+            if (!dimensions.isEmpty()) {
+                requestBody.deleteCharAt(requestBody.length() - 1);
+            }
+            requestBody.append("],"
+                    + "\"metrics\":[");
+            for (String metric : metrics) {
+                requestBody.append("{\"name\":\"").append(metric).append("\"},");
+            }
+            // Remove the last comma
+            if (!metrics.isEmpty()) {
+                requestBody.deleteCharAt(requestBody.length() - 1);
+            }
+            requestBody.append("],"
+                    + "\"dateRanges\":["
+                    + "{\"startDate\":\"").append(startDate).append("\",\"endDate\":\"").append(endDate).append("\"}],"
+                    + "\"keepEmptyRows\":true"
+                    + "}");
+
+            return requestBody.toString();
+        }
+
     }
 }
